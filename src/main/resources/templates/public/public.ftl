@@ -1,0 +1,1 @@
+<#assign bash=request.contextPath/>

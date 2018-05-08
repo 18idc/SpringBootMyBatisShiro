@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.q18idc.sbms.demo.mapper.PermissionMapper">
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
+    <resultMap id="BaseResultMap" type="com.q18idc.sbms.demo.entity.Permission">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="percode" jdbcType="VARCHAR" property="percode"/>
+        <result column="parentid" jdbcType="INTEGER" property="parentid"/>
+        <result column="available" jdbcType="INTEGER" property="available"/>
+        <result column="delete" jdbcType="INTEGER" property="delete"/>
+    </resultMap>
+    <!--获取用户所属权限菜单列表-->
+    <select id="getUserPermissionMenuListByUserName" parameterType="string" resultMap="BaseResultMap">
+      select distinct tp.* from tb_permission tp,tb_role_permission trp where trp.roleid in (
+        select distinct tr.id from tb_role tr,tb_user_role tur where tur.userid = (
+          select id from tb_user where username=#{username}
+        ) and tur.roleid=tr.id and tr.available=1 and tr.`delete`=0
+      ) and trp.perid=tp.id and tp.available = 1 and tp.`delete` =0 and tp.type='menu';
+    </select>
+
+    <!--获取用户所属权限列表-->
+    <select id="getUserPermissionListByUserName" parameterType="string" resultMap="BaseResultMap">
+        select distinct tp.* from tb_permission tp,tb_role_permission trp where trp.roleid in (
+          select distinct tr.id from tb_role tr,tb_user_role tur where tur.userid = (
+            select id from tb_user where username=#{username}
+          ) and tur.roleid=tr.id and tr.available=1 and tr.`delete`=0
+        ) and trp.perid=tp.id and tp.available = 1 and tp.`delete` =0 and tp.type='permission';
+    </select>
+</mapper>

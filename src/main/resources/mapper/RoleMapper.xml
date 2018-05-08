@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.q18idc.sbms.demo.mapper.RoleMapper">
+    <cache type="org.mybatis.caches.redis.RedisCache"/>
+    <resultMap id="BaseResultMap" type="com.q18idc.sbms.demo.entity.Role">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="available" jdbcType="INTEGER" property="available"/>
+        <result column="delete" jdbcType="INTEGER" property="delete"/>
+    </resultMap>
+</mapper>
