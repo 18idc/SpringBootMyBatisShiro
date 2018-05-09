@@ -78,6 +78,9 @@
         var form = new mini.Form("#loginWindow");
         form.validate();
         if (form.isValid() == false) return;
+
+        var login_load = mini.loading('登录中，请稍后','登录');
+
         //提交数据
         var data = form.getData();
        $.ajax({
@@ -85,6 +88,9 @@
             type: "post",
             data: data,
             success: function (res) {
+               //隐藏登录加载框
+                mini.hideMessageBox(login_load);
+
                res = mini.decode(res);
                if (res.flag){
                    loginWindow.hide();
