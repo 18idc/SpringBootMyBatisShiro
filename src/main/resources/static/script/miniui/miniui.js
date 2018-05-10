@@ -1,4 +1,6 @@
 ﻿/**
+* License Code : PMZG4AQ1
+*
 * jQuery MiniUI 3.8.2
 *
 * Date : 2018-04-25
