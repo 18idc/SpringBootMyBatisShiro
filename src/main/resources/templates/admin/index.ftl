@@ -63,8 +63,9 @@
     //关闭标签前的询问
     tabs.on("beforecloseclick", function (e) {
         e.cancel = true;
-        mini.confirm('确定要关闭 '+e.tab.title+' 标签吗？','关闭标签？',function (action) {
+        var index = mini.confirm('确定要关闭 '+e.tab.title+' 标签吗？','关闭标签？',function (action) {
             if (action == "ok"){
+                mini.hideMessageBox(index);
                 tabs.removeTab(e.tab);
             }
         });
