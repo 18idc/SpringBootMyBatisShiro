@@ -1,7 +1,5 @@
 <#include "../public/public.ftl" >
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>后台管理</title>
@@ -34,20 +32,18 @@
         <!--Splitter-->
         <div class="mini-splitter" style="width:100%;height:100%;" borderStyle="border:0;">
             <div size="180" maxSize="250" minSize="100" showCollapseButton="true" style="border:0;">
-                <!--OutlookMenu-->
-                <div id="leftMenu" class="mini-outlookmenu" url="${bash}/admin/menu/list" onitemselect="onItemSelect"
-                     idField="id" parentField="pid" textField="text" borderStyle="border:0" expandOnLoad="false"
+                <!--OutlookTree-->
+                <div id="leftTree" class="mini-outlooktree" url="${bash}/admin/menu/list" onnodeclick="onNodeSelect"
+                     textField="text" idField="id" parentField="pid"
                 >
                 </div>
 
             </div>
-
             <div showCollapseButton="false" style="border:0;">
                 <!--Tabs-->
                 <div id="mainTabs" class="mini-tabs" activeIndex="0" style="width:100%;height:100%;"
-                     plain="false">
+                     plain="false" onactivechanged="onTabsActiveChanged">
                     <div title="首页" url="${bash}/admin/main.html" ></div>
-
                 </div>
             </div>
         </div>
@@ -58,38 +54,57 @@
 
 <script type="text/javascript">
     mini.parse();
-    var tabs = mini.get("mainTabs");
+    var tabs1 = mini.get("mainTabs");
+    var tree = mini.get("leftTree");
 
     //关闭标签前的询问
-    tabs.on("beforecloseclick", function (e) {
+    tabs1.on("beforecloseclick", function (e) {
         e.cancel = true;
-        var index = mini.confirm('确定要关闭 '+e.tab.title+' 标签吗？','关闭标签？',function (action) {
+        mini.confirm('确定要关闭 '+e.tab.title+' 标签吗？','关闭标签？',function (action) {
             if (action == "ok"){
-                mini.hideMessageBox(index);
-                tabs.removeTab(e.tab);
+                tabs1.removeTab(e.tab);
             }
         });
     });
 
-    function onItemSelect(e) {
-        var item = e.item;
-        showTab(item);
+    function onNodeSelect(e) {
+        var node = e.node;
+        var isLeaf = e.isLeaf;
+        if (isLeaf) {
+            showTab(node);
+        }
     }
-    
-    function showTab(item) {
-        var id = "tab$" + item.id;
+
+
+    function showTab(node) {
+        var tabs = mini.get("mainTabs");
+        var id = "tab$" + node.id;
         var tab = tabs.getTab(id);
-        if (!tab){
+        if (!tab) {
             tab = {};
-            tab._nodeid = item.id;
+            tab._nodeid = node.id;
             tab.name = id;
-            tab.title = item.text;
+            tab.title = node.text;
             tab.showCloseButton = true;
-            tab.url = '${bash}'+item.url;
+            tab.url = '${bash}'+node.url;
             tabs.addTab(tab);
         }
         tabs.activeTab(tab);
     }
+
+    function onTabsActiveChanged(e) {
+        var tabs = e.sender;
+        var tab = tabs.getActiveTab();
+        if (tab && tab._nodeid) {
+
+            var node = tree.getNode(tab._nodeid);
+            if (node && !tree.isSelectedNode(node)) {
+                tree.selectNode(node);
+            }
+        }
+    }
+
+
 
     //刷新
     function onReloadClick() {

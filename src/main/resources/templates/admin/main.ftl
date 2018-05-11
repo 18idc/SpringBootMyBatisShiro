@@ -9,7 +9,6 @@
     <script src="${bash}/script/echarts/echarts.min.js" type="text/javascript"></script>
 </head>
 <body>
-
 <div id="tongji" style="width: 500px;height: 500px;"></div>
 <br>
 <button class="mini-button" iconCls="icon-reload" onclick="echart('tongji')">刷新图表</button>

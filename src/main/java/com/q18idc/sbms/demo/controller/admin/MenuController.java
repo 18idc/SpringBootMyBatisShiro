@@ -36,12 +36,9 @@ public class MenuController{
         List<Permission> menuList = sysService.findMenuListByUserName(username);
 
         Map<String ,Object> map = new HashMap<>();
-        map.put("id", "menu");
-        map.put("text", "后台管理");
+        map.put("id", 0);
+        map.put("text", "导航菜单");
         data.add(map);
-
-        String[] icons = {"icon-note","icon-reports"};
-        int c=0;
 
         if (menuList!=null){
             for (Permission permission : menuList) {
@@ -49,13 +46,17 @@ public class MenuController{
                 map1.put("id", permission.getId());
                 map1.put("text", permission.getName());
                 map1.put("url", permission.getUrl());
-                map1.put("pid", "menu");
-                map1.put("iconCls", icons[c]);
-                map1.put("iconPosition", "top");
+                map1.put("pid", permission.getParentid());
                 data.add(map1);
-                c++;
             }
         }
+
+        Map<String ,Object> map1 = new HashMap<>();
+        map1.put("id", 5);
+        map1.put("text", "商品管理");
+        map1.put("url", "/admin/user/list.html");
+        map1.put("pid",3);
+        data.add(map1);
 
         return data;
     }
