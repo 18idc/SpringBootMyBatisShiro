@@ -16,7 +16,6 @@ import java.io.PrintWriter;
  */
 @Controller
 public class ErrorController {
-
     /**
      * 未授权处理
      * @return

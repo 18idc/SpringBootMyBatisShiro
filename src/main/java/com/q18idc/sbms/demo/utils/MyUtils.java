@@ -6,6 +6,7 @@ import org.apache.shiro.subject.Subject;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.text.ParseException;
@@ -102,7 +103,12 @@ public class MyUtils {
      * @return
      */
     public static boolean strIsLetter(String s){
-        byte[] bytes = s.getBytes();
+        byte[] bytes = new byte[0];
+        try {
+            bytes = s.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         for (int i = 0; i < bytes.length; i++) {
             if((s.charAt(i)>='a' && s.charAt(i)<= 'z') || s.charAt(i)>='A' && s.charAt(i)<= 'Z'){
                 return true;
@@ -210,7 +216,7 @@ public class MyUtils {
     public static String stampToDate(String s){
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        long lt = new Long(s);
+        long lt = Long.parseLong(s);
         Date date = new Date(lt);
         res = simpleDateFormat.format(date);
         return res;
@@ -225,7 +231,7 @@ public class MyUtils {
     public static String stampToDate(String s,String rule){
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(rule);
-        long lt = new Long(s);
+        long lt = Long.parseLong(s);
         Date date = new Date(lt);
         res = simpleDateFormat.format(date);
         return res;
@@ -292,8 +298,10 @@ public class MyUtils {
      */
     public static boolean isTimeStr(String time){
         SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date data = null;
         try {
-            Date date = sdf.parse(time);
+            data = sdf.parse(time);
+            data=null;
             return true;
         } catch (ParseException e) {
             return false;
@@ -308,8 +316,10 @@ public class MyUtils {
      */
     public static boolean isTimeStr(String time,String rule){
         SimpleDateFormat sdf =  new SimpleDateFormat(rule);
+        Date date = null;
         try {
-            Date date = sdf.parse(time);
+            date = sdf.parse(time);
+            date = null;
             return true;
         } catch (ParseException e) {
             return false;

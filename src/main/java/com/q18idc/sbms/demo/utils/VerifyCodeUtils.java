@@ -92,10 +92,10 @@ public class VerifyCodeUtils{
         }
         File dir = outputFile.getParentFile();
         if(!dir.exists()){
-            dir.mkdirs();
+            boolean mkdirs = dir.mkdirs();
         }
         try{
-            outputFile.createNewFile();
+            boolean newFile = outputFile.createNewFile();
             FileOutputStream fos = new FileOutputStream(outputFile);
             outputImage(w, h, fos, code);
             fos.close();
@@ -166,7 +166,7 @@ public class VerifyCodeUtils{
         char[] chars = code.toCharArray();
         for(int i = 0; i < verifySize; i++){
             AffineTransform affine = new AffineTransform();
-            affine.setToRotation(Math.PI / 4 * rand.nextDouble() * (rand.nextBoolean() ? 1 : -1), (w / verifySize) * i + fontSize/2, h/2);
+            affine.setToRotation( Math.PI /(double)4 * rand.nextDouble() * (rand.nextBoolean() ? 1 : -1), (w / (double)verifySize) * i + fontSize/(double)2, h/(double)2);
             g2.setTransform(affine);
             g2.drawChars(chars, i, 1, ((w-10) / verifySize) * i + 5, h/2 + fontSize/2 - 10);
         }
@@ -253,14 +253,5 @@ public class VerifyCodeUtils{
  
         }
  
-    }
-    public static void main(String[] args) throws IOException{
-        File dir = new File("F:/verifies");
-        int w = 200, h = 80;
-        for(int i = 0; i < 50; i++){
-            String verifyCode = generateVerifyCode(4);
-            File file = new File(dir, verifyCode + ".jpg");
-            outputImage(w, h, file, verifyCode);
-        }
     }
 }

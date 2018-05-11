@@ -66,7 +66,6 @@ public class MyFormAuthenticationFilter extends FormAuthenticationFilter {
      */
     @Override
     protected boolean onLoginSuccess(AuthenticationToken token, Subject subject, ServletRequest request, ServletResponse response) throws Exception {
-        HttpServletRequest request1 = (HttpServletRequest) request;
         HttpServletResponse response1 = (HttpServletResponse) response;
         PrintWriter out = response1.getWriter();
         JsonResult jsonResult = new JsonResult();
@@ -77,5 +76,4 @@ public class MyFormAuthenticationFilter extends FormAuthenticationFilter {
 //        return super.onLoginSuccess(token, subject, request, response);
         return true;
     }
-
 }

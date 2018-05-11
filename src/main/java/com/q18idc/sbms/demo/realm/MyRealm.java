@@ -21,7 +21,7 @@ import java.util.List;
  * @author q18idc.com QQ993143799
  * @date 2018/5/3 15:49
  */
-public class MyRealm extends AuthorizingRealm  {
+public class MyRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
 
@@ -45,6 +45,7 @@ public class MyRealm extends AuthorizingRealm  {
 
     /**
      * 认证
+     *
      * @param token
      * @return
      * @throws AuthenticationException
@@ -59,7 +60,7 @@ public class MyRealm extends AuthorizingRealm  {
         User user = userService.getUserByUserName(username);
 
         //如果查询结果返回null  直接返回null
-        if(user == null){
+        if (user == null) {
             return null;
         }
         //密码 从数据库中查询获取
@@ -85,6 +86,7 @@ public class MyRealm extends AuthorizingRealm  {
 
     /**
      * 身份授权
+     *
      * @param principals
      * @return
      */
@@ -96,10 +98,10 @@ public class MyRealm extends AuthorizingRealm  {
 
         //根据身份信息获取权限信息
         List<Permission> permissionList = sysService.findPermissionListByUserName(activeUser.getUsername());
-        if(permissionList!=null){
+        if (permissionList != null) {
             //定义的权限集合
             List<String> permissions = new ArrayList<>();
-            if (permissionList != null) {
+            if (permissionList.size() > 0) {
                 for (Permission permission : permissionList) {
                     //将数据库中的权限标识符放入集合
                     permissions.add(permission.getPercode());
