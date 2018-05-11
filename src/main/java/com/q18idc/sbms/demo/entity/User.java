@@ -1,14 +1,17 @@
 package com.q18idc.sbms.demo.entity;
 
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
+
+/**
+ * 用户实体类
+ * @author q18idc.com QQ993143799
+ */
 
 @Table(name = "tb_user")
 @EqualsAndHashCode(callSuper = true)
@@ -17,18 +20,32 @@ import java.util.Date;
 public class User extends Condition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Getter
+    @Setter
     private Integer id;
 
+    @Getter
+    @Setter
     private String username;
 
+    @Getter
+    @Setter
     private String password;
 
+    @Getter
+    @Setter
     private String salt;
 
+    @Getter
+    @Setter
     private String phone;
 
+    @Getter
+    @Setter
     private String email;
 
+    @Getter
+    @Setter
     private String sex;
 
     private Date birthday;
@@ -44,62 +61,6 @@ public class User extends Condition {
         if (birthday != null) {
             this.birthday = (Date)birthday.clone();
         }
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
     }
 
     public Date getBirthday() {
