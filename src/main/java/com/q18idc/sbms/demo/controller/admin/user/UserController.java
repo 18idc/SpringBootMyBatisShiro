@@ -22,7 +22,13 @@ public class UserController {
     @RequestMapping("list.html")
     @RequiresPermissions("user:list")
     public String list(){
-        return "";
+        return "admin/user/list";
+    }
+
+    @RequestMapping("disables.html")
+    @RequiresPermissions("user:disables")
+    public String disables(){
+        return "admin/user/disables";
     }
 
     /**

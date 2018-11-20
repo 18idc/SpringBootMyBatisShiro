@@ -51,12 +51,12 @@ public class MenuController{
             }
         }
 
-        Map<String ,Object> map1 = new HashMap<>();
-        map1.put("id", 5);
-        map1.put("text", "商品管理");
-        map1.put("url", "/admin/user/list.html");
-        map1.put("pid",3);
-        data.add(map1);
+//        Map<String ,Object> map1 = new HashMap<>();
+//        map1.put("id", 5);
+//        map1.put("text", "商品管理");
+//        map1.put("url", "/admin/user/list.html");
+//        map1.put("pid",3);
+//        data.add(map1);
 
         return data;
     }
