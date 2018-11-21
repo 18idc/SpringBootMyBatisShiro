@@ -79,19 +79,19 @@ FOREIGN KEY (perid) REFERENCES tb_permission (id) ON DELETE SET NULL ON UPDATE S
 
 CREATE UNIQUE INDEX tb_user_username_uindex ON tb_user (username);
 
-INSERT INTO `sbmss`.`tb_user`(`id`, `username`, `password`, `salt`, `phone`, `email`) VALUES (1, 'admin', '859b370c093563f0cd454f2d01fbd161', 'q18idc.com', '13800138000', 'admin@q18idc.com');
+INSERT INTO `tb_user`(`id`, `username`, `password`, `salt`, `phone`, `email`) VALUES (1, 'admin', '859b370c093563f0cd454f2d01fbd161', 'q18idc.com', '13800138000', 'admin@q18idc.com');
 
-INSERT INTO `sbmss`.`tb_role`(`id`, `name`, `available`, `delete`) VALUES (1, '超级管理员', 1, 0);
+INSERT INTO `tb_role`(`id`, `name`, `available`, `delete`) VALUES (1, '超级管理员', 1, 0);
 
-INSERT INTO `sbmss`.`tb_user_role`(`id`, `userid`, `roleid`) VALUES (1, 1, 1);
+INSERT INTO `tb_user_role`(`id`, `userid`, `roleid`) VALUES (1, 1, 1);
 
-INSERT INTO `sbmss`.`tb_permission`(`id`, `name`, `type`, `url`, `percode`, `parentid`, `available`, `delete`) VALUES (1, '用户管理', 'menu', '/', NULL, NULL, 1, 0);
-INSERT INTO `sbmss`.`tb_permission`(`id`, `name`, `type`, `url`, `percode`, `parentid`, `available`, `delete`) VALUES (2, '用户列表', 'menu', '/admin/user/list.html', NULL, 1, 1, 0);
-INSERT INTO `sbmss`.`tb_permission`(`id`, `name`, `type`, `url`, `percode`, `parentid`, `available`, `delete`) VALUES (3, '用户列表', 'permission', '/admin/user/list.html', 'user:list', NULL, 1, 0);
-INSERT INTO `sbmss`.`tb_permission`(`id`, `name`, `type`, `url`, `percode`, `parentid`, `available`, `delete`) VALUES (4, '禁用用户', 'menu', '/admin/user/disables.html', NULL, 1, 1, 0);
+INSERT INTO `tb_permission`(`id`, `name`, `type`, `url`, `percode`, `parentid`, `available`, `delete`) VALUES (1, '用户管理', 'menu', '/', NULL, NULL, 1, 0);
+INSERT INTO `tb_permission`(`id`, `name`, `type`, `url`, `percode`, `parentid`, `available`, `delete`) VALUES (2, '用户列表', 'menu', '/admin/user/list.html', NULL, 1, 1, 0);
+INSERT INTO `tb_permission`(`id`, `name`, `type`, `url`, `percode`, `parentid`, `available`, `delete`) VALUES (3, '用户列表', 'permission', '/admin/user/list.html', 'user:list', NULL, 1, 0);
+INSERT INTO `tb_permission`(`id`, `name`, `type`, `url`, `percode`, `parentid`, `available`, `delete`) VALUES (4, '禁用用户', 'menu', '/admin/user/disables.html', NULL, 1, 1, 0);
 
-INSERT INTO `sbmss`.`tb_role_permission`(`id`, `roleid`, `perid`) VALUES (1, 1, 1);
-INSERT INTO `sbmss`.`tb_role_permission`(`id`, `roleid`, `perid`) VALUES (2, 1, 2);
-INSERT INTO `sbmss`.`tb_role_permission`(`id`, `roleid`, `perid`) VALUES (3, 1, 3);
-INSERT INTO `sbmss`.`tb_role_permission`(`id`, `roleid`, `perid`) VALUES (4, 1, 4);
+INSERT INTO `tb_role_permission`(`id`, `roleid`, `perid`) VALUES (1, 1, 1);
+INSERT INTO `tb_role_permission`(`id`, `roleid`, `perid`) VALUES (2, 1, 2);
+INSERT INTO `tb_role_permission`(`id`, `roleid`, `perid`) VALUES (3, 1, 3);
+INSERT INTO `tb_role_permission`(`id`, `roleid`, `perid`) VALUES (4, 1, 4);
 
